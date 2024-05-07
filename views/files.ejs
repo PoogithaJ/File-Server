@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uploaded Files</title>
+</head>
+<body>
+    <h1>Uploaded Files</h1>
+    <form action="/" method="POST" enctype="multipart/form-data">
+        <input type="file" name="myfile">
+        <button type="submit">Upload</button>
+    </form>
+    <ul>
+        <% if (files && files.length) { %>
+            <% files.forEach(function(file) { %>
+                <li>
+                    <a href="/uploads/<%= encodeURIComponent(file.originalname) %>"><%= file.originalname %></a>
+                    <a href="/download/<%= encodeURIComponent(file.originalname) %>">&#x1F4E5;</a>
+                    <form action="/delete/<%= encodeURIComponent(file.originalname) %>" method="POST" style="display: inline;">
+                        <button type="submit">&#x1F5D1;</button>
+                    </form>
+                </li>
+            <% }); %>
+        <% } else { %>
+            <li>No files uploaded yet.</li>
+        <% } %>
+    </ul>
+</body>
+</html>
+
+
